@@ -41,49 +41,14 @@ bool TaskManager::update()
 			// bail if encounter disabled or empyt task..they should sort to bottom.
 			if (taskPtr[i]->isEnabled == false || taskPtr[i]->IsNotEmpty == false)
 				break;
-			//Serial.print(taskPtr[i]->taskName); Serial.print("\t");
-			//Serial.print(taskPtr[i]->executeNextAt); Serial.print("\t");
-			//// start over if we encounter lower priority task after higher priority ran
-			//if (ran && taskPtr[i]->priority >= priority_m )
-			//	break;
-	
-			//// if nothing has ran execute the first encountered	otherwise only like priorities
-			//if (!ran || taskPtr[i]->priority >= priority_m)
-			//{ 
-			//	
 				if (taskPtr[i]->run())
 				{ 
 					ran = ret  = true;
 				currentTimeStamp = micros();
 				}
-			//
-			//}
-			// track the next execution time to set the callback
-		/*	if (!ran)
-				nextLowest = nextLowest > taskPtr[i]->executeNextAt ? taskPtr[i]->executeNextAt : nextLowest;
-			 set the task priority 
-			priority_m = taskPtr[i]->priority;*/
-			
+	
 		}
 	 
-	/*	while (1 && ranOnce)
-		{ */
-		//for (int i = 0; i < taskCount;i++)
-		//{
-
-
-		//	// bail if encounter disabled or empyt task..they should sort to bottom.
-		//	if (taskPtr[i]->isEnabled == false || taskPtr[i]->IsNotEmpty == false)
-		//		break;
-		//	Serial.print(taskPtr[i]->taskName); Serial.print("\t");
-		//	Serial.print(taskPtr[i]->executeNextAt); Serial.print("\t");
-		//	Serial.print(taskPtr[i]->priority); Serial.print("\t");
-		//	Serial.println(nextLowest);
-		//}
-		// Serial.println("end");
-		//
-		//}
-		//return false;
 		 if ( (ran ))
 		{ 
 			sort();
@@ -93,22 +58,9 @@ bool TaskManager::update()
 				if(taskPtr[i]->isEnabled && taskPtr[i]->IsNotEmpty )
 					nextLowest = nextLowest > taskPtr[i]->executeNextAt   ? taskPtr[i]->executeNextAt : nextLowest;
 			rundown = nextLowest > micros() ? nextLowest - 500 : micros();
-		//	Serial.println(rundown);
+
 		 }
-	/*	if (nextLowest <= micros())
-			ranOnce = false;
-		nextLowest = UINT32_MAX;
-		currentTimeStamp = micros();
-		for (int i = 0; i < taskCount;i++)
-		 if(currentTimeStamp <= taskPtr[i]->executeNextAt)
-			nextLowest = nextLowest > taskPtr[i]->executeNextAt && nextLowest >currentTimeStamp ? taskPtr[i]->executeNextAt : nextLowest;*/
-		/*if (!ran && micros() > nextLowest)
-			ran = true;
-		else*/
-			
-			
-		
-	/*} while ( !ran);*/
+
 	return ret;
 }
 void TaskManager ::init(Task * t, int ss )
