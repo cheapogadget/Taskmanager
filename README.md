@@ -1,4 +1,4 @@
-# Taskmanager
+# Taskmanager32
 
 Task manager is a simple c++ library designed to manage repeating list of tasks executed based on priority and frequency period.
 
